@@ -66,6 +66,8 @@ chmod +x deploy.sh
 
 ## Architecture diagram (HLD)
 Find the architecture diagram here at - [cambi-cache-draw](https://drive.google.com/file/d/1MdwTCM_XtEvDMn5jXlZEtqE2KzUkwPT3/view?usp=sharing)
+![cambai-cache](https://github.com/Akshay448/cambai-cache/assets/30473155/7309260e-6a3a-42e3-aeed-f0d6d3dc5c8c)
+
 
 ## Implementation ideas for scalability and robust system 
 
