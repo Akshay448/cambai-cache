@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "8d0ba4f3-5760-4faa-acd8-863c850e009a",
+		"name": "Cambiai-cache",
+		"description": "CRUD operations for a key value store implemented using fast api, redis and huey task queue",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8034719"
+	},
+	"item": [
+		{
+			"name": "READ Key",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/read/camb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"read",
+						"camb"
+					]
+				},
+				"description": "get a value for a key from the key value store"
+			},
+			"response": []
+		},
+		{
+			"name": "Create key",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost/create/camb?value=ai",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"create",
+						"camb"
+					],
+					"query": [
+						{
+							"key": "value",
+							"value": "ai"
+						}
+					]
+				},
+				"description": "create a new key in the key value store"
+			},
+			"response": []
+		},
+		{
+			"name": "Update key",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost/update/camb?value=superai",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"update",
+						"camb"
+					],
+					"query": [
+						{
+							"key": "value",
+							"value": "superai"
+						}
+					]
+				},
+				"description": "update a given key in key value store"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete key",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost/delete/camb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"delete",
+						"camb"
+					]
+				},
+				"description": "delete a given key from kev value store"
+			},
+			"response": []
+		}
+	]
+}

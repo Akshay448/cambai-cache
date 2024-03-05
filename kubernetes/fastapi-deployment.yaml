@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-deployment
+spec:
+  selector:
+    matchLabels:
+      app: fastapi-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: fastapi-app
+    spec:
+      containers:
+      - name: fastapi-app
+        image: akhi448/redis-huey-app:latest
+        ports:
+        - containerPort: 80

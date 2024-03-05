@@ -1,0 +1,7 @@
+fastapi
+aioredis
+uvicorn
+huey
+redis
+tenacity
+pydantic

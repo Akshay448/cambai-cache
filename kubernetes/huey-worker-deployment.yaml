@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: huey-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: huey-worker
+  template:
+    metadata:
+      labels:
+        app: huey-worker
+    spec:
+      containers:
+      - name: huey-worker
+        image: akhi448/redis-huey-app:latest
+        command: ["huey_consumer.py", "huey_config.huey"]
