@@ -9,7 +9,7 @@ To keep things simple and get started using the key value store
 1. Clone the repository to your local machine.
 2. Ensure Docker Desktop is installed with Kubernetes enabled.
 3. Execute the deployment script to apply Kubernetes configurations: `$ ./deploy.sh`.
-4. Import the provided Postman collection to interact with the key-value store endpoints.
+4. Import the provided [Postman collection](Cambiai-cache.postman_collection.json) in postman client to interact with the key-value store endpoints.
 
 
 # INDEX
@@ -17,7 +17,7 @@ To keep things simple and get started using the key value store
 2. [Building Image and Running with Kubernetes](#building-image-and-running-with-kubernetes)
 3. [Components Used in the System](#components-used-in-the-system)
 4. [Architecture Diagram (HLD)](#architecture-diagram-hld)
-5. [Implementation Ideas for Scalability and Robustness](#implementation-ideas-for-scalability-and-robustness)
+5. [Implementation Ideas for Scalability and Robustness](#implementation-ideas-for-scalability-and-robust-system-)
 6. [Code Implementation (LLD)](#code-implementation-lld)
 
 ## Project Structure
@@ -56,7 +56,7 @@ kubectl config get-contexts
 chmod +x deploy.sh
 .deploy.sh
 ```
-5. Use Postman to interact with the API endpoints provided in the collection.
+5. Use Postman to interact with the API endpoints provided in the [collection](Cambiai-cache.postman_collection.json).
 
 ## Components Used in the system
 * FastAPI: For creating RESTful endpoints.
@@ -66,8 +66,6 @@ chmod +x deploy.sh
 
 ## Architecture diagram (HLD)
 Find the architecture diagram here at - [cambi-cache-draw](https://drive.google.com/file/d/1MdwTCM_XtEvDMn5jXlZEtqE2KzUkwPT3/view?usp=sharing)
-![cambai-cache](https://github.com/Akshay448/cambai-cache/assets/30473155/7309260e-6a3a-42e3-aeed-f0d6d3dc5c8c)
-
 
 ## Implementation ideas for scalability and robust system 
 
@@ -92,9 +90,15 @@ a task queue interacting with multiple workers for efficient workload distributi
 7. redis operator - helps to manage the redis cluster
 
 ### huey and fastapi deployments and services
-pods can be scaled independently with given number of replicas
-using hpa to scale based on cpu or memory use
-use readiness and liveness probes so that request goes to healthy pods
+1. stateless pods can be scaled independently with given number of replicas
+2. using hpa to scale based on cpu or memory use
+3. use readiness and liveness probes so that request goes to healthy pods
+
+### More notes
+* Microservices Architecture: separating the FastAPI application, Huey workers, and Redis into distinct service. each component can be scaled independently
+* Asynchronous Processing with Huey: To ensure the FastAPI application remains responsive, heavy operations are offloaded to Huey. This reduces the API's latency, especially under heavy load, by not blocking client requests.
+* Containerization with Docker: huey and fastapi endpoints
+
 
 ## Code Implementation (LLD)
 The project's code is mostly covered in main.py and huey_config.py
@@ -123,11 +127,5 @@ The project's code is mostly covered in main.py and huey_config.py
 
 
 
-
-Microservices Architecture: By separating the FastAPI application, Huey workers, and Redis into distinct services, we enhance the system's scalability and fault tolerance. This design allows each component to be scaled independently based on demand.
-Asynchronous Processing with Huey: To ensure the FastAPI application remains responsive, heavy operations are offloaded to Huey. This reduces the API's latency, especially under heavy load, by not blocking client requests.
-
-Containerization with Docker: This facilitates consistent deployment across development, testing, and production environments, reducing the "it works on my machine" syndrome.
-Horizontal Scaling with Kubernetes: Utilizing Kubernetes' Horizontal Pod Autoscaler (HPA), our application can automatically scale out/in based on metrics such as CPU usage, ensuring it can handle varying loads efficiently.
 
 
